@@ -86,7 +86,7 @@ final class PaginationExtension implements QueryResultCollectionExtensionInterfa
         $isPartialEnabled = $this->pagination->isPartialEnabled($operation, $context);
 
         if ($isPartialEnabled) {
-            return new class($doctrineOrmPaginator) extends AbstractPaginator {
+            return new class ($doctrineOrmPaginator) extends AbstractPaginator {
             };
         }
 
