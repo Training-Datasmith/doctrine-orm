@@ -52,10 +52,12 @@ trait LinksHandlerTrait
         $identifiers = array_reverse($identifiers);
 
         foreach (array_reverse($links) as $link) {
-            if (null !== $link->getExpandedValue() || !$link->getFromClass()) {
+            if (null !== $link->getExpandedValue()) {
                 continue;
             }
-
+            if (!$link->getFromClass()) {
+                continue;
+            }
             $fromClass = $link->getFromClass();
             if (!$this->managerRegistry->getManagerForClass($fromClass)) {
                 $fromClass = $this->getLinkFromClass($link, $operation);

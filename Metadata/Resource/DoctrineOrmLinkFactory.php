@@ -67,7 +67,10 @@ final class DoctrineOrmLinkFactory implements LinkFactoryInterface, PropertyLink
             }
 
             $relationClass = $doctrineMetadata->getAssociationTargetClass($property);
-            if (!($mappedBy = $doctrineMetadata->getAssociationMappedByTargetField($property)) || !$this->resourceClassResolver->isResourceClass($relationClass)) {
+            if (!($mappedBy = $doctrineMetadata->getAssociationMappedByTargetField($property))) {
+                continue;
+            }
+            if (!$this->resourceClassResolver->isResourceClass($relationClass)) {
                 continue;
             }
 

@@ -98,7 +98,7 @@ final class DoctrineOrmResourceCollectionMetadataFactory implements ResourceMeta
         }
 
         if (null === $operation->getProcessor()) {
-            $operation = $operation->withProcessor($this->getProcessor($operation));
+            return $operation->withProcessor($this->getProcessor($operation));
         }
 
         return $operation;

@@ -203,7 +203,7 @@ final class OrderFilter extends AbstractFilter implements OrderFilterInterface
             $properties = array_map(static function ($propertyOptions) {
                 // shorthand for default direction
                 if (\is_string($propertyOptions)) {
-                    $propertyOptions = [
+                    return [
                         'default_direction' => $propertyOptions,
                     ];
                 }

@@ -134,13 +134,10 @@ final class EagerLoadingExtension implements QueryCollectionExtensionInterface, 
                 // skip associations that are not resource classes
                 continue;
             }
-
-            if (
-                // Always skip extra lazy associations
-                ClassMetadataInfo::FETCH_EXTRA_LAZY === $mapping['fetch']
-                // We don't want to interfere with doctrine on this association
-                || (false === $forceEager && ClassMetadataInfo::FETCH_EAGER !== $mapping['fetch'])
-            ) {
+            if (ClassMetadataInfo::FETCH_EXTRA_LAZY === $mapping['fetch']) {
+                continue;
+            }
+            if (false === $forceEager && ClassMetadataInfo::FETCH_EAGER !== $mapping['fetch']) {
                 continue;
             }
 
@@ -156,8 +153,10 @@ final class EagerLoadingExtension implements QueryCollectionExtensionInterface, 
 
             $fetchEager = $propertyMetadata->getFetchEager();
             $uriTemplate = $propertyMetadata->getUriTemplate();
-
-            if (false === $fetchEager || null !== $uriTemplate) {
+            if (false === $fetchEager) {
+                continue;
+            }
+            if (null !== $uriTemplate) {
                 continue;
             }
 

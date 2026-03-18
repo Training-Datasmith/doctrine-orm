@@ -165,7 +165,7 @@ final class FilterEagerLoadingExtension implements QueryCollectionExtensionInter
         // Change join aliases
         foreach ($joinParts[$originAlias] as $joinPart) {
             /** @var Join $joinPart */
-            $joinString = preg_replace($this->buildReplacePatterns($aliases), $replacements, $joinPart->getJoin());
+            $joinString = preg_replace($this->buildReplacePatterns($aliases), $replacements, (string) $joinPart->getJoin());
             $pos = strpos($joinString, '.');
             $joinCondition = (string) $joinPart->getCondition();
             if (false === $pos) {
